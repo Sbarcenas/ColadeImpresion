@@ -5,17 +5,25 @@
  */
 package com.estructura.colaimpresion.main;
 
+import com.estructura.colaimpresion.controlador.Controlador;
+import com.estructura.colaimpresion.modelo.*;
+import com.estructura.colaimpresion.vista.*;
+
 /**
  *
  * @author Sjbárcenas
  */
-public class ColaImpresion {
+public class Impresion {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ColaImpresion model = new ColaImpresion();
+        Vista view = new Vista();
+        Controlador controler = new Controlador(model, view);
+        controler.iniciar();
+        
     }
     
 }

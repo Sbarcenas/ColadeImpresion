@@ -1,4 +1,4 @@
-package com.estructura.colaimpresion.model;
+package com.estructura.colaimpresion.modelo;
 
 public class Nodo <E> {
      private E valor;

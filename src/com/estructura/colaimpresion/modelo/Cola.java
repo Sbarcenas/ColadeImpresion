@@ -1,9 +1,10 @@
-package com.estructura.colaimpresion.model;
+package com.estructura.colaimpresion.modelo;
 
 
 public class Cola <E> {
     
-    private Nodo top,end;
+    private Nodo top;
+    private Nodo end;
     private int size;
     
     public Cola(){
