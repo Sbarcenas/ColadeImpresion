@@ -6,7 +6,6 @@
 package com.estructura.colaimpresion.controlador;
 
 import com.estructura.colaimpresion.modelo.*;
-import com.estructura.colaimpresion.modelo.ColaImpresion;
 import com.estructura.colaimpresion.vista.Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,61 +22,92 @@ import java.util.logging.Logger;
  */
 public class Controlador implements ActionListener{
 
-  private ColaImpresion queuImpresion;
-  private Cola queue;
-  private Nodo node;
+  private Cola<Archivo> queueI = new Cola<>();
   private Vista view;
-  public ColaImpresion colaImpresion = new ColaImpresion();
   
-  public Controlador(ColaImpresion queueImpresion, Vista view){
+  public Controlador(Vista view){
       this.view = view;
-      this.queuImpresion = queueImpresion;
       this.view.btnCargarDatos.addActionListener(this);
       this.view.btnIniciarSimulacion.addActionListener(this);
       this.view.bntSalir.addActionListener(this);
+       
+       
   }
   
   public void iniciar(){
       view.setTitle("Cola de Impresión");
       view.setLocationRelativeTo(null);
       view.setVisible(true);
+      
+    
+      
   }
   
-    private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-    }                                              
-                                            
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(view.btnCargarDatos == e.getSource()){
-            String[] divisor;
+  public void cargar(){
+        /*CARGA DE ELEMENTOS*/
+             String[] divisor;
             String cadena;
-            Cola<Archivo> archivos = new Cola();
+            FileReader f;
+            BufferedReader b;
+            Cola<Archivo> archivos = new Cola<Archivo>();
             try {
                 //Cargar Datos
                 
-                FileReader f = new FileReader("spool.txt");
-                BufferedReader b = new BufferedReader(f);
-                while((cadena = b.readLine())!=null) {
-                divisor = cadena.split(",");
-                colaImpresion.enqueue(new Archivo(divisor[0], Double.parseDouble(divisor[1])));
+                f = new FileReader("spool.txt");
+                b = new BufferedReader(f);
                 
-        }
-        colaImpresion.display();
-        b.close();
+                while(( cadena = b.readLine())!= null) {
+                
+                divisor = cadena.split(",");
+                queueI.enqueue(new Archivo(divisor[0], Double.parseDouble(divisor[1])));
+                    System.out.println(queueI.top); 
+                
+                }
+                b.close();
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
+      
+  }
+  
+    public void actualizar(){
+    
+    Nodo<Archivo> nodo = queueI.top;
+    view.md.removeAllElements();
+
+    while (nodo != null) {
+
+    System.out.println(nodo.getValor().getNombre());
+    view.md.addElement(nodo.getValor().getNombre());
+
+    nodo=nodo.getLink();
+    }
+    }
+
+  
+    private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        // TODO add your handling code here:
+    }       
+    
+                                       
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(view.btnCargarDatos == e.getSource()){
+          cargar();
+         actualizar();
         }else if(view.bntSalir ==e.getSource()){
         //Salir    
+            view.dispose();
         }
         else if(view.btnIniciarSimulacion ==e.getSource()){
         //Iniciar Simulación  
         }
         
     }
+       
   }
 

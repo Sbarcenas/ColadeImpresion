@@ -1,11 +1,11 @@
 package com.estructura.colaimpresion.modelo;
-
+import java.lang.Iterable;
 
 public class Cola <E> {
     
-    private Nodo top;
-    private Nodo end;
-    private int size;
+    public Nodo<E> top;
+    public Nodo<E> end;
+    public int size;
     
     public Cola(){
         this.top=this.end=null;
@@ -15,7 +15,7 @@ public class Cola <E> {
     public void enqueue(E valor){
         Nodo <E> nodo = new Nodo(valor);
         if (top == null){ // Cola vacia?
-          this.top= this.end = nodo;          
+          this.top = this.end = nodo;          
         }else{
           this.end.setLink(nodo);
           this.end=nodo;

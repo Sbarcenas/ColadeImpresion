@@ -19,9 +19,10 @@ public class Impresion {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ColaImpresion model = new ColaImpresion();
+        
         Vista view = new Vista();
-        Controlador controler = new Controlador(model, view);
+        Controlador controler = new Controlador (view);
+        
         controler.iniciar();
         
     }

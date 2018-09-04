@@ -2,7 +2,7 @@ package com.estructura.colaimpresion.modelo;
 
 public class Nodo <E> {
      private E valor;
-     private Nodo link;
+     private Nodo link = null;
       public Nodo() {};
         public Nodo(E valor) {
             this.valor = valor;
@@ -10,7 +10,7 @@ public class Nodo <E> {
         }
 
     public E getValor() {
-        return valor;
+        return (E)valor;
     }
 
     public Nodo getLink() {
