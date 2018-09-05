@@ -63,7 +63,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(lstArchivos);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 150, 190));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 150, 190));
 
         btnCargarDatos.setText("Cargar Datos");
         btnCargarDatos.setMaximumSize(new java.awt.Dimension(113, 23));
@@ -94,7 +94,7 @@ public class Vista extends javax.swing.JFrame {
         jPanel1.add(bntSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, 170, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/estructura/colaimpresion/vista/paper_1.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 150, 140));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 150, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

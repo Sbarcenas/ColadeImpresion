@@ -25,7 +25,7 @@ import com.estructura.colaimpresion.vista.Simulacion;
  */
 public class Controlador implements ActionListener, Runnable {
 
-  private Cola<Archivo> queueI = new Cola<>();
+  public Cola<Archivo> queueI = new Cola<>();
   private Vista view;
   public Timer timer;
   public Timer timers;
@@ -49,7 +49,7 @@ public class Controlador implements ActionListener, Runnable {
   
   public void cargar(){
         /*CARGA DE ELEMENTOS*/
-             String[] divisor;
+            String[] divisor;
             String cadena;
             FileReader f;
             BufferedReader b;
@@ -115,7 +115,7 @@ public class Controlador implements ActionListener, Runnable {
     } 
     public void crearJdialog(){
     this.panel= new Simulacion(view, false);
-    panel.setLocation(840, 370);
+    panel.setLocationRelativeTo(null);
     panel.setVisible(true);
     }
     
@@ -135,9 +135,10 @@ public class Controlador implements ActionListener, Runnable {
         public void run() {
         
         i++;
-        dec--;
+        
         panel.setVisible(true);
-        panel.lblEspera.setText("Espere... " + dec);
+        panel.lblArchivo.setText(queueI.top.getValor().getNombre().toString());
+        panel.lblEspera.setText("Espere... " + dec--);
         System.out.println(i);
         
         if(rounds == i){
