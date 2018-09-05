@@ -15,22 +15,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Timer;
+import java.util.TimerTask;
+import com.estructura.colaimpresion.vista.Simulacion;
 
 /**
  *
  * @author Sjbárcenas
  */
-public class Controlador implements ActionListener{
+public class Controlador implements ActionListener, Runnable {
 
   private Cola<Archivo> queueI = new Cola<>();
   private Vista view;
-  
+  public Timer timer;
+  public Timer timers;
+  Simulacion panel;
+ 
   public Controlador(Vista view){
+       
       this.view = view;
       this.view.btnCargarDatos.addActionListener(this);
       this.view.btnIniciarSimulacion.addActionListener(this);
       this.view.bntSalir.addActionListener(this);
-       
+        
        
   }
   
@@ -38,9 +45,6 @@ public class Controlador implements ActionListener{
       view.setTitle("Cola de Impresión");
       view.setLocationRelativeTo(null);
       view.setVisible(true);
-      
-    
-      
   }
   
   public void cargar(){
@@ -70,7 +74,7 @@ public class Controlador implements ActionListener{
             } catch (IOException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
-      
+            view.btnIniciarSimulacion.setEnabled(true);
   }
   
     public void actualizar(){
@@ -80,33 +84,98 @@ public class Controlador implements ActionListener{
 
     while (nodo != null) {
 
-    System.out.println(nodo.getValor().getNombre());
-    view.md.addElement(nodo.getValor().getNombre());
+    view.md.addElement(nodo.getValor().getId()+" . "+nodo.getValor().getNombre());
 
     nodo=nodo.getLink();
     }
     }
-
-  
-    private void btnCargarDatosActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-    }       
     
+    public void timer(){
+        
+        timers = new Timer();
+        int delay = 0;
+        int period = 10000+(int)(queueI.top.getValor().getEspera()*1000);
+        timers.scheduleAtFixedRate(new TimerTask() {
+        Nodo<Archivo> node = queueI.top;
+        int b=0;
+        int ways = queueI.size;
+        @Override
+        
+        public void run() {
+            b++;
+            if(queueI.top == null){
+                view.btnIniciarSimulacion.setEnabled(true);
+                timers.cancel();
+            }else{
+            one();
+            }
+            }
+        }, delay, period);
+      
+    } 
+    public void crearJdialog(){
+    this.panel= new Simulacion(view, false);
+    panel.setLocation(840, 370);
+    panel.setVisible(true);
+    }
+    
+    public void one(){
+       
+    timer = new Timer();
+        int delay = 0;
+        int period = 1000;
+        crearJdialog();
+        timer.scheduleAtFixedRate(new TimerTask() {
+        int rounds = (int) queueI.top.getValor().getEspera();
+        int i = 0;
+        int dec = (int) queueI.top.getValor().getEspera();
+        
+        @Override
+        
+        public void run() {
+        
+        i++;
+        dec--;
+        panel.setVisible(true);
+        panel.lblEspera.setText("Espere... " + dec);
+        System.out.println(i);
+        
+        if(rounds == i){
+        queueI.dequeue();        
+        actualizar(); 
+        panel.setVisible(false);
+        timer.cancel();      
+        }
+        
+        }
+        
+        
+        
+        }, delay, period);
+        
+    }
                                        
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(view.btnCargarDatos == e.getSource()){
-          cargar();
+         cargar();
          actualizar();
         }else if(view.bntSalir ==e.getSource()){
         //Salir    
-            view.dispose();
+            
+            System.exit(0);
+            
         }
         else if(view.btnIniciarSimulacion ==e.getSource()){
-        //Iniciar Simulación  
+           timer();
+           view.btnIniciarSimulacion.setEnabled(false);
         }
-        
+    }
+
+    @Override
+    public void run() {
+    one();
     }
        
   }

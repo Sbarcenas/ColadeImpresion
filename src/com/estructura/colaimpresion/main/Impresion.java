@@ -6,7 +6,6 @@
 package com.estructura.colaimpresion.main;
 
 import com.estructura.colaimpresion.controlador.Controlador;
-import com.estructura.colaimpresion.modelo.*;
 import com.estructura.colaimpresion.vista.*;
 
 /**

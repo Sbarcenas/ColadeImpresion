@@ -1,5 +1,5 @@
 package com.estructura.colaimpresion.modelo;
-import java.lang.Iterable;
+
 
 public class Cola <E> {
     

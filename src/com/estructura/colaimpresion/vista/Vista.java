@@ -23,6 +23,8 @@ public class Vista extends javax.swing.JFrame {
         jScrollPane3.setBorder(null);
         md = new DefaultListModel();
         lstArchivos.setModel(md);
+        btnIniciarSimulacion.setEnabled(false);
+        
     }
     
    
@@ -37,13 +39,31 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstArchivos = new javax.swing.JList<>();
         btnCargarDatos = new javax.swing.JButton();
         btnIniciarSimulacion = new javax.swing.JButton();
         bntSalir = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstArchivos = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lstArchivos.setBackground(new java.awt.Color(255, 255, 255));
+        lstArchivos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = {};
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(lstArchivos);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 150, 190));
 
         btnCargarDatos.setText("Cargar Datos");
         btnCargarDatos.setMaximumSize(new java.awt.Dimension(113, 23));
@@ -53,8 +73,15 @@ public class Vista extends javax.swing.JFrame {
                 btnCargarDatosActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCargarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 170, -1));
 
         btnIniciarSimulacion.setText("Iniciar Simulación");
+        btnIniciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSimulacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnIniciarSimulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 170, -1));
 
         bntSalir.setText("Salir");
         bntSalir.setMaximumSize(new java.awt.Dimension(113, 23));
@@ -64,41 +91,20 @@ public class Vista extends javax.swing.JFrame {
                 bntSalirActionPerformed(evt);
             }
         });
+        jPanel1.add(bntSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 310, 170, -1));
 
-        lstArchivos.setBackground(new java.awt.Color(240, 240, 240));
-        lstArchivos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {};
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(lstArchivos);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/estructura/colaimpresion/vista/paper_1.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 150, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
-                .addComponent(btnIniciarSimulacion)
-                .addGap(79, 79, 79)
-                .addComponent(bntSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCargarDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIniciarSimulacion)
-                    .addComponent(bntSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
         );
 
         pack();
@@ -111,6 +117,10 @@ public class Vista extends javax.swing.JFrame {
     private void bntSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalirActionPerformed
       
     }//GEN-LAST:event_bntSalirActionPerformed
+
+    private void btnIniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSimulacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIniciarSimulacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +162,8 @@ public class Vista extends javax.swing.JFrame {
     public javax.swing.JButton bntSalir;
     public javax.swing.JButton btnCargarDatos;
     public javax.swing.JButton btnIniciarSimulacion;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JList<String> lstArchivos;
     // End of variables declaration//GEN-END:variables
